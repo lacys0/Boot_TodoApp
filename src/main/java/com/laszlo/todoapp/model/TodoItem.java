@@ -31,4 +31,8 @@ public class TodoItem {
     @ManyToOne
     @JoinColumn(name = "subject_id") // This specifies the foreign key column name in the todo_item table
     private Subject subject; // This will hold the associated Subject object
+
+    public boolean isCompleted() {
+        return dueDate != null && dueDate.isBefore(LocalDate.now());
+    }
 }
