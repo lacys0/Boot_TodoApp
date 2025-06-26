@@ -2,10 +2,10 @@ package com.laszlo.todoapp.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn; // New import
-import jakarta.persistence.ManyToOne; // New import
+import jakarta.persistence.GenerationType; // New import
+import jakarta.persistence.Id; // New import
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
