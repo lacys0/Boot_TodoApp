@@ -1,0 +1,56 @@
+# ci-build.yml
+name: CI Build & Test
+
+# 1. Configure when the workflow runs
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+# 2. Define the jobs that make up this workflow
+jobs:
+  build:
+    # 3. Specify the runner environment
+    runs-on: ubuntu-latest # Use the latest Ubuntu Linux runner
+
+    # 4. Define the steps for this job
+    steps:
+      - name: Checkout Code # Step 1: Get the code from your repository
+        uses: actions/checkout@v4 # Use the official checkout action
+
+      - name: Set up JDK 17 # Step 2: Configure Java Development Kit
+        uses: actions/setup-java@v4 # Use the official setup-java action
+        with:
+          java-version: "17" # Specify the Java version (match your pom.xml's java.version)
+          distribution: "temurin" # Use Eclipse Temurin distribution (recommended)
+          cache: "maven" # Cache Maven dependencies for faster builds
+
+      - name: Build with Maven # Step 3: Run the Maven build commands
+        run: mvn -B package --file pom.xml # -B for batch mode (non-interactive)
+        # This command will:
+        # - Compile your code
+        # - Run your unit tests (including Jacoco)
+        # - Run Checkstyle (if configured to run during 'package' phase or earlier)
+        # - Package your application into a .jar file in the 'target' directory
+
+      - name: Upload JaCoCo Report # Step 4: Upload Jacoco test report as an artifact
+        uses: actions/upload-artifact@v4 # Action to upload build artifacts
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/ # Path where Jacoco HTML report is generated
+
+      - name: Upload Checkstyle Report # Step 5: Upload Checkstyle report as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: checkstyle-report
+          path: target/site/checkstyle.html # Path where Checkstyle HTML report is generated
+
+      - name: Upload Application JAR # Step 6: Upload the final application JAR as an artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: todoapp # Name of the artifact
+          path: target/*.jar # Path to your packaged JAR file (e.g., target/todoapp-0.0.1-SNAPSHOT.jar)
+
