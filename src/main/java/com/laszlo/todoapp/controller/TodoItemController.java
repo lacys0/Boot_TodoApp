@@ -1,5 +1,7 @@
 package com.laszlo.todoapp.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +31,7 @@ public class TodoItemController {
     public String listTodoItems(Model model) {
         model.addAttribute("todoItems", todoItemService.getAllTodoItems());
         model.addAttribute("subjects", subjectService.getAllSubjects()); // Pass subjects to the view
+        model.addAttribute("currentDate", LocalDate.now()); // Useful for checking overdue status in Thymeleaf
         return "index";
     }
 
