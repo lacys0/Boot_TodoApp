@@ -41,7 +41,7 @@ A web-based CRUD application for task management, built on Spring Boot. This pro
 2.  **Build the project:**
 
     ```bash
-    mvn clean install
+    ./mvnw.cmd clean install
     ```
 
 3.  **Run the application:**
@@ -65,7 +65,7 @@ Tests are written for the service layer using JUnit 5 and Mockito. JaCoCo is con
 
 - Run tests and generate reports:
   ```bash
-  mvn clean verify
+  ./mvnw.cmd clean verify
   ```
 - View JaCoCo report: `target/site/jacoco/index.html`
   _(Service layer currently achieves 100% line and method coverage.)_
@@ -76,7 +76,7 @@ Checkstyle is integrated into the Maven build to enforce coding standards (Googl
 
 - Run Checkstyle:
   ```bash
-  mvn clean validate
+  ./mvnw.cmd clean validate
   ```
 - View Checkstyle report: `target/site/checkstyle.html`
 
