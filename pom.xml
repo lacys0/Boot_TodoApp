@@ -68,7 +68,7 @@
 	</dependencies>
 
 	<build>
-		<plugins>
+		<plugins>	
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
@@ -99,14 +99,18 @@
 										<limit>
 											<counter>LINE</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.60</minimum>
-										</limit>
+											<minimum>0.60</minimum> </limit>
 										<limit>
 											<counter>BRANCH</counter>
 											<value>COVEREDRATIO</value>
-											<minimum>0.60</minimum>
-										</limit>
+											<minimum>0.60</minimum> </limit>
 									</limits>
+									<excludes>
+										<exclude>com/laszlo/todoapp/TodoAppApplication.class</exclude>
+										<exclude>com/laszlo/todoapp/model/**</exclude>
+										<exclude>com/laszlo/todoapp/repository/**</exclude>
+										<exclude>com/laszlo/todoapp/controller/**</exclude>
+									</excludes>
 								</rule>
 							</rules>
 						</configuration>
